@@ -8,6 +8,11 @@
  */
 package com;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -25,6 +30,10 @@ import java.util.StringTokenizer;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
+
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * @author AUP Team
@@ -887,69 +896,69 @@ public final class PaulUtil extends UtilTool {
 	 * @param Object
 	 * @return String
 	 */
-//	public static final String serialize(Object obj) {
-//	   ByteArrayOutputStream baos = null;
-//	   GZIPOutputStream zipper = null;
-//	   ObjectOutputStream o = null;
-//	   try {
-//		   baos = new ByteArrayOutputStream();
-//		   zipper = new GZIPOutputStream(baos);
-//			
-//		   o = new ObjectOutputStream(zipper);
-//		   o.writeObject(obj);
-//		   o.flush();
-//	   } catch(IOException ioe){
-//		 //  m_logger.error("IOException", ioe);
-//	   } finally {
-//		   if(o != null){
-//			   try {o.close();} catch(Exception ex){/**/}
-//		   }
-//		   if(zipper != null){
-//			   try {
-//				   zipper.finish();
-//				   zipper.close();
-//			   } catch(Exception ex){/**/}
-//		   }
-//		   if(baos != null){
-//			   try {baos.close();} catch(Exception ex){/**/}
-//		   }
-//	   }
-//	   return(new String(Base64.encode(baos.toByteArray())));
-// }
-//	
-//	/**
-//	 * 
-//	 * @param String
-//	 * @return Object
-//	 */
-//  public static final Object deserialize(String data) {
-//	   Object obj = null;
-//	   ByteArrayInputStream bais = null;
-//	   GZIPInputStream unzipper = null;
-//	   ObjectInputStream o = null;
-//	 
-//	   try {
-//		   bais = new ByteArrayInputStream(Base64.decode(data));
-//		   unzipper = new GZIPInputStream(bais);
-//		   o = new ObjectInputStream(unzipper);
-//		   obj = o.readObject();
-//	   } catch(IOException ioe){
-//		 //  m_logger.error("IOException", ioe);
-//	   } catch(ClassNotFoundException cnfee){
-//		//   m_logger.error("ClassNotFoundException", cnfee);
-//	   } finally {
-//		   if(o != null){
-//			   try {o.close();} catch(Exception ex){/**/}
-//		   }
-//		   if(unzipper != null){
-//			   try {unzipper.close();} catch(Exception ex){/**/}
-//		   }
-//		   if(bais != null){
-//			   try {bais.close();} catch(Exception ex){/**/}
-//		   }
-//	   }
-//	   
-//	   return(obj);
-// }
+	public static final String serialize(Object obj) {
+	   ByteArrayOutputStream baos = null;
+	   GZIPOutputStream zipper = null;
+	   ObjectOutputStream o = null;
+	   try {
+		   baos = new ByteArrayOutputStream();
+		   zipper = new GZIPOutputStream(baos);
+			
+		   o = new ObjectOutputStream(zipper);
+		   o.writeObject(obj);
+		   o.flush();
+	   } catch(IOException ioe){
+		 //  m_logger.error("IOException", ioe);
+	   } finally {
+		   if(o != null){
+			   try {o.close();} catch(Exception ex){/**/}
+		   }
+		   if(zipper != null){
+			   try {
+				   zipper.finish();
+				   zipper.close();
+			   } catch(Exception ex){/**/}
+		   }
+		   if(baos != null){
+			   try {baos.close();} catch(Exception ex){/**/}
+		   }
+	   }
+	   return(new String(Base64.encodeBase64(baos.toByteArray())));
+ }
+	
+	/**
+	 * 
+	 * @param String
+	 * @return Object
+	 */
+  public static final Object deserialize(String data) {
+	   Object obj = null;
+	   ByteArrayInputStream bais = null;
+	   GZIPInputStream unzipper = null;
+	   ObjectInputStream o = null;
+	 
+	   try {
+		   bais = new ByteArrayInputStream(Base64.decodeBase64(data));
+		   unzipper = new GZIPInputStream(bais);
+		   o = new ObjectInputStream(unzipper);
+		   obj = o.readObject();
+	   } catch(IOException ioe){
+		 //  m_logger.error("IOException", ioe);
+	   } catch(ClassNotFoundException cnfee){
+		//   m_logger.error("ClassNotFoundException", cnfee);
+	   } finally {
+		   if(o != null){
+			   try {o.close();} catch(Exception ex){/**/}
+		   }
+		   if(unzipper != null){
+			   try {unzipper.close();} catch(Exception ex){/**/}
+		   }
+		   if(bais != null){
+			   try {bais.close();} catch(Exception ex){/**/}
+		   }
+	   }
+	   
+	   return(obj);
+ }
  
 }
