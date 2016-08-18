@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class XMLUtilsTest extends TestCase {
 	
 	private static final Logger logger = LoggerFactory.getLogger(XMLUtilsTest.class);
 
-	@Test
+	//@Test
 	public void testgenerateTemplateTest() throws Exception {
 		final String inputXML = "<employee id ='1'><name>Tester</name><company><name>UHG</name><address></address></company></employee>";
 		final String template = XMLUtils.generateTemplate(inputXML);
@@ -29,7 +30,7 @@ public class XMLUtilsTest extends TestCase {
 		System.out.println(template);
 	}
 
-	@Test
+	//@Test
 	public void testgetFillTemplateTest() throws Exception {
 		final String inputXML = "<employee id ='2'><name>developer</name><company><name></name><address></address></company></employee>";
 		final Document document = XMLUtils.getStringAsDocument(inputXML);
@@ -44,7 +45,7 @@ public class XMLUtilsTest extends TestCase {
 		logger.debug(new XMLOutputter().outputString(filledDocument));
 	}
 
-	@Test
+	//@Test
 	public void getFillTemplateTest_WithArrayelement() throws Exception {
 		final String inputXML = "<employee id ='2'><name>developer</name><company><name></name><address></address></company></employee>";
 		final Document document = XMLUtils.getStringAsDocument(inputXML);
@@ -85,12 +86,11 @@ public class XMLUtilsTest extends TestCase {
 				"	</soapenv:Body>" +
 				"</soapenv:Envelope>" ;
 		
-		
-		String inputXML2 = THFileUtils.getFileSystemFileAsString("P://CoaService//fault.XML");
+		String inputXML2 = THFileUtils.getFileSystemFileAsString("P://Unifier//InquiryService//preqrespdisb.xml");
 		
 		
 		final Document document = XMLUtils.getStringAsDocument(inputXML2);
-		final Map<String, String> xpathsMap = new HashMap<String, String>();
+		final Map<String, String> xpathsMap = new LinkedHashMap<String, String>();
 		XMLUtils.generateXpaths(document.getRootElement(), xpathsMap);
 		for (Iterator<String> iterator = xpathsMap.keySet().iterator(); iterator.hasNext();) {
 			String type = iterator.next();
@@ -103,7 +103,7 @@ public class XMLUtilsTest extends TestCase {
 	}
 	
 
-	@Test
+	//@Test
 	public void compareXMLsForSpecificXPathsTestFalse() throws Exception {
 		final String inputXML1 = "<employee id ='2'><name>developer</name><company><name></name><address></address></company></employee>";
 		final String inputXML2 = "<employee id ='2'><name>tester</name><company><name></name><address></address></company></employee>";
@@ -117,7 +117,7 @@ public class XMLUtilsTest extends TestCase {
 		logger.debug("Is documents same : "+sameXMLs);
 	}
 	
-	@Test
+	//@Test
 	public void compareXMLsForSpecificXPathsTestTrue1() throws Exception {
 		final String inputXML1 = "<employee id ='2'><name>developer</name><company><name>UHG</name><address>US</address></company></employee>";
 		final String inputXML2 = "<employee id ='2'><name>developer</name><company><name>GSD</name><address>HYD</address></company></employee>";
@@ -131,7 +131,7 @@ public class XMLUtilsTest extends TestCase {
 		logger.debug("Is documents same : "+sameXMLs);
 	}
 	
-	@Test
+	//@Test
 	public void compareXMLsForSpecificXPathsTestTrue2() throws Exception {
 		final String inputXML1 = "<employee id ='2'><name>developer</name><company><name>UHG</name><address>US</address></company></employee>";
 		final String inputXML2 = "<employee id ='2'><name>tester</name><company><name>UHG</name><address>HYD</address></company></employee>";
@@ -145,7 +145,7 @@ public class XMLUtilsTest extends TestCase {
 		logger.debug("Is documents same : "+sameXMLs);
 	}
 	
-	@Test
+	//@Test
 	public void compareXMLsForSpecificXPathsTestString() throws Exception {
 		final String inputXML1 = "<employee id ='2'><name>developer</name><company><name>UHG</name><address>US</address></company></employee>";
 		final String inputXML2 = "<employee id ='2'><name>tester</name><company><name>UHG</name><address>HYD</address></company></employee>";
@@ -157,7 +157,7 @@ public class XMLUtilsTest extends TestCase {
 		logger.debug("Is documents same : "+sameXMLs);
 	}
 	
-	@Test
+	//@Test
 	public void compareFullXMLSfalse() throws Exception {
 		final String inputXML1 = "<employee id ='2'><name>developer</name><company><name>UHG</name><address>US</address></company></employee>";
 		final String inputXML2 = "<employee id ='2'><name>tester</name><company><name>UHG</name><address>US</address></company></employee>";
@@ -167,7 +167,7 @@ public class XMLUtilsTest extends TestCase {
 		assertFalse(sameXMLs);
 		
 	}
-	@Test
+	//@Test
 	public void compareFullXMLS() throws Exception {
 		final String inputXML1 = "<employee id ='2'><name>developer</name><company><name>UHG</name><address>US</address></company></employee>";
 		final String inputXML2 = "<employee id ='2'><name>developer</name><company><name>UHG</name><address>US</address></company></employee>";
@@ -178,7 +178,7 @@ public class XMLUtilsTest extends TestCase {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testGetStringAsDocumentException() throws Exception {
 		final String inputXML1 = "<employee id ='2'/><name>developer</name><company><name>UHG</name><address>US</address></company></employee>";
 		try {
@@ -190,7 +190,7 @@ public class XMLUtilsTest extends TestCase {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testGetStringAsDocumentIOException() throws Exception {
 		final String inputXML1 = new File("/test.xml").getPath();
 		try {
@@ -203,7 +203,7 @@ public class XMLUtilsTest extends TestCase {
 	}
 	
 	
-	@Test
+	//@Test
 	public void testPrettyPrint() throws Exception {
 		final String inputXML1 = "<employee id ='2'><name>developer</name><company><name>UHG</name><address>US</address></company></employee>";
 			final String formatted = XMLUtils.prettyPrint(inputXML1);
@@ -211,7 +211,7 @@ public class XMLUtilsTest extends TestCase {
 			assertNotSame(inputXML1, formatted);
 	}
 	
-	@Test
+	//@Test
 	public void testPrettyPrintFail() throws Exception {
 		final String inputXML1 = "<employee id ='2'/><name>developer</name><company><name>UHG</name><address>US</address></company></employee>";
 			final String formatted = XMLUtils.prettyPrint(inputXML1);
@@ -220,7 +220,7 @@ public class XMLUtilsTest extends TestCase {
 	}
 
 	
-	@Test
+	//@Test
 	public void removeEmptyNodesTest() throws Exception {
 		final String inputXML = "<?xml version='1.0' encoding='UTF-8'?>" +
 				"<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/'>" +
@@ -251,7 +251,7 @@ public class XMLUtilsTest extends TestCase {
 		System.out.println(XMLUtils.prettyPrint(documentAsString));
 	}
 	
-	@Test
+	//@Test
 	public void removeEmptyNodesTestEmpty() throws Exception {
 		final String inputXML = "<?xml version='1.0' encoding='UTF-8'?>" +
 				"<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/'>" +
@@ -273,7 +273,7 @@ public class XMLUtilsTest extends TestCase {
 		System.out.println(XMLUtils.prettyPrint(documentAsString));
 	}
 	
-	@Test
+	//@Test
 	public void replaceValuesXMLTest() throws Exception {
 		final String inputXML = "<?xml version='1.0' encoding='UTF-8'?>" +
 				"<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/'>" +

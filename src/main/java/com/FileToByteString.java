@@ -56,8 +56,9 @@ public class FileToByteString {
 		
 	//	File file = new File("C:\\Users\\pam16105\\Downloads\\ParkingLotMap-8.05.15-11x172.pdf");
 	//	File file = new File("C:\\paul\\test.txt");
-	//	File file = new File("C:\\paul\\testdoc.docx");
-		File file = new File("C:\\paul\\test1meg.zip");
+//		File file = new File("C:\\paul\\testdoc.docx");
+	//	File file = new File("C:\\paul\\test1meg.zip");
+		File file = new File("C:\\paul\\testtext.zip");
 		
 	//File file = new File("C:\\paul\\test.zip");
 		
@@ -74,7 +75,7 @@ public class FileToByteString {
 		    System.out.println("encoded byte array STRING size: " + ns.length());
 	
 		    //display the encoded string
-//		    System.out.println(ns);
+		    System.out.println(ns);
 		    
 		    //decode
 		    byte[] in = Base64.decodeBase64(ns);
@@ -101,7 +102,7 @@ public class FileToByteString {
 //            String ext = FilenameUtils.getExtension("test.doc");            
 //            System.out.println(ext + " is " +mimeType3);
             
-            String out = "c:\\paul\\testout.zip";
+            String out = "c:\\paul\\testout.txt";
             IOUtils.copy(is, new FileOutputStream(out));
 
 		    System.out.println(dh1.getContentType() + " " + size);

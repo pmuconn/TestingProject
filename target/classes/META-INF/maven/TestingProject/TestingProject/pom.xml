@@ -140,6 +140,35 @@
 			<version>2.7.2</version>
 		</dependency>
 
+<!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-frontend-jaxws -->
+<dependency>
+    <groupId>org.apache.cxf</groupId>
+    <artifactId>cxf-rt-frontend-jaxws</artifactId>
+    <version>3.1.7</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-transports-http -->
+<dependency>
+    <groupId>org.apache.cxf</groupId>
+    <artifactId>cxf-rt-transports-http</artifactId>
+    <version>3.1.7</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-frontend-jaxrs -->
+<dependency>
+    <groupId>org.apache.cxf</groupId>
+    <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+    <version>3.1.7</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-bundle -->
+<dependency>
+    <groupId>org.apache.cxf</groupId>
+    <artifactId>cxf-bundle</artifactId>
+    <version>2.2.9</version>
+</dependency>
+
+
 
 
 	</dependencies>
