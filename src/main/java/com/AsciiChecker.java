@@ -1,5 +1,6 @@
 package com;
 
+import java.text.Normalizer;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,12 +22,14 @@ public class AsciiChecker {
 	public static void testRegex(List<String> stringsToCheck) {
 		for (String s : stringsToCheck) {
 	        System.out.println(s + " has ascii: " + checkWithRegex(s));
+	        System.out.println("--Fixed string: " + correctString(s));
 		}
 	}
 
 	public static void testLoop(List<String> stringsToCheck) {
 		for (String s : stringsToCheck) {
 	        System.out.println(s + " has ascii: " + checkByCharLoop(s));
+	        System.out.println("--Fixed string: " + correctString(s));
 		}
 	}
 
@@ -51,6 +54,12 @@ public class AsciiChecker {
 			}
 		}
 		return result;
+	}
+	
+	public static String correctString(String badString) {
+		String result = Normalizer.normalize(badString, Normalizer.Form.NFD);
+		String resultString = result.replaceAll("[^\\x00-\\x7F]", "");
+		return resultString;
 	}
 
 }
