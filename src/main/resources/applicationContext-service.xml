@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:configurator="http://cocoon.apache.org/schema/configurator"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+	http://cocoon.apache.org/schema/configurator http://cocoon.apache.org/schema/configurator/cocoon-configurator-1.0.1.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.spring" />
+
+	<!-- user proxy for autowiring -->
+	<!-- 
+	<bean id="user" class="com.uhg.teaas.domain.User" scope="session">
+		<aop:scoped-proxy />
+	</bean>
+	 -->
+
+<!-- 
+1.ThreadPoolTaskExecutor create threads to up corePoolSize when it's initiated.
+2.It takes request up to corePoolSize and let thread to process the task.
+3.If there are more requests incoming while all threads are busy, ThreadPoolTaskExecutor is start queuing up those request into internal queue. 
+   This can be problematic since this queue size will be Integer.MAX_VALUE as default if you don't specify queue queueCapacity.
+4.Request added in #3 will be executed by thread when there is any available threads in the pool.
+5.If requests are keep coming and all threads are busy & queue is full, the ThreadPoolTaskExecutor starts creating new threads up to 
+   maxPoolSize to process requests.
+6.If requests over those (increased threads number + queue size), then task will be rejected or following policy you specified.
+
+    <bean id="taskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="5" />
+		<property name="maxPoolSize" value="10" />
+		<property name="WaitForTasksToCompleteOnShutdown" value="true" />
+	</bean>
+
+ -->
+
+</beans>
