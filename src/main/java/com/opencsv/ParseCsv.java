@@ -20,15 +20,13 @@ public class ParseCsv {
 	
 	@SuppressWarnings("unchecked")
 	public void testParse() {
-	    String s = "n,o,foo\n" + //headers
-	            "kyle,123456,emp123\n" + //line1
-	            "jimmy,abcnum,cust09878"; //line2
 	    HeaderColumnNameTranslateMappingStrategy<TestBean> strat = new HeaderColumnNameTranslateMappingStrategy<TestBean>();
 	    strat.setType(TestBean.class);
 	    Map<String, String> map = new HashMap<String, String>();
-	    map.put("Id", "id");
 	    map.put("Fname", "firstName");
 	    map.put("Lname", "lastName");
+	    map.put("Id", "id");
+	    map.put("doesntExist", "nope");
 	    strat.setColumnMapping(map);
 
 	    CSVReader reader = new CSVReader(new InputStreamReader(ClassLoader.getSystemResourceAsStream("test.csv")));
