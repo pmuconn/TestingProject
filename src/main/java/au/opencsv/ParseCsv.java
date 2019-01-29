@@ -1,4 +1,4 @@
-package com.opencsv;
+package au.opencsv;
 
 import java.io.InputStreamReader;
 import java.util.HashMap;
