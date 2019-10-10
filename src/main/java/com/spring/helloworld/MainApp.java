@@ -12,6 +12,12 @@ public class MainApp {
 		
 		obj.setMessage("blah");
 		obj.getMessage();
+		
+		//try using the application context provider
+		
+		HelloWorld obj2 = (HelloWorld) ApplicationContextProvider.getApplicationContext().getBean("helloWorld");
+		obj.setMessage("blah using context provider.");
+		obj.getMessage();
 	}
 
 }
