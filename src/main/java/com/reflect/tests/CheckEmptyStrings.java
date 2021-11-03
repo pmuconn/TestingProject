@@ -2,7 +2,8 @@ package com.reflect.tests;
 
 import java.lang.reflect.Field;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.aop.support.AopUtils;
 
 public class CheckEmptyStrings {
 
@@ -17,7 +18,8 @@ public class CheckEmptyStrings {
 	 */
 	public boolean isValid() {
 		boolean result = false;
-		for (Field field : this.getClass().getDeclaredFields()) {
+		Class clazz = AopUtils.getTargetClass(this);
+		for (Field field : this.getClass().getFields()) {
 			field.setAccessible(true);
 			if (field.getType().isAssignableFrom(String.class)) {
 				try {

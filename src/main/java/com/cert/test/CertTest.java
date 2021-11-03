@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.security.KeyPair;
 import java.security.KeyStore;
 
-import org.apache.cxf.jaxrs.utils.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 public class CertTest {
 

@@ -36,6 +36,7 @@ public class RegexPatternTest {
 		emailList.add("\"john..doe\"@example.org");
 		emailList.add("maureen.a.o'connor@paul.com");
 		emailList.add("SPSPV@admin.paul.com");
+		emailList.add("sarah@jolleyconcrete.net");
 		
 		//just spacer
 		emailList.add("************************");

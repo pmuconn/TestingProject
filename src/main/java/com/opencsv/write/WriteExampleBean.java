@@ -14,7 +14,7 @@ public class WriteExampleBean extends CsvBean {
 	private String colB;
 
 	@CsvBindByName(column = "last")
-//    @CsvBindByPosition(position = 2)     //just showing that with the customMappingStrategy, if there is no csvBindingByPosition, this column is ignored.
+    @CsvBindByPosition(position = 2)     //just showing that with the customMappingStrategy, if there is no csvBindingByPosition, this column is ignored.
     private String colC;
 
     public WriteExampleBean(String colA, String colB, String colC) {

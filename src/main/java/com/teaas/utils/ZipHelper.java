@@ -4,8 +4,10 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -361,7 +363,7 @@ public class ZipHelper {
 				        String s = sc.nextLine();
 				        sb.append(s);
 				    }
-				    if(filename.contains(".vsm") || filename.contains(".vsi") || filename.contains(".config")) {
+				    if(filename.contains(".vsm") || filename.contains(".vsi") || filename.contains(".config") || filename.contains(".xml")) {
 				    	RRData.put(filename, sb.toString());
 				    	logger.debug("File data: "+sb);
 				    }
@@ -378,4 +380,16 @@ public class ZipHelper {
 		}
 		return RRData;
 	}
+	
+	@SuppressWarnings("unused")
+	public static void main(String[] args) throws FileNotFoundException {
+		final File initialFile = new File("C:\\Users\\pam16105\\Downloads\\DependentTuitionWaiver.nitro_s");
+	      final InputStream targetStream = 
+	        new DataInputStream(new FileInputStream(initialFile));
+		
+	      Map<String,String> zipContents = ZipHelper.getFilesFromMAR(targetStream);
+	      
+	      System.out.println("done.");
+	}
+	
 }

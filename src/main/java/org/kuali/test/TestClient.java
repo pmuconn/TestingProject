@@ -1,12 +1,8 @@
 package org.kuali.test;
 
-import java.math.BigDecimal;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.cert.X509Certificate;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -14,27 +10,12 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-
-import org.kuali.kfs.core.v5_0.AccountingLineType;
-import org.kuali.kfs.core.v5_0.ObjectFactory;
-import org.kuali.kfs.core.v5_0.RequisitionItemType;
-import org.kuali.kfs.core.v5_0.UnifierDelivery;
-import org.kuali.kfs.core.v5_0.UnifierNote;
-import org.kuali.kfs.core.v5_0.UnifierReceiving;
-import org.kuali.kfs.core.v5_0.UnifierRequisitionRequest;
-import org.kuali.kfs.core.v5_0.UnifierRequisitionResponse;
-import org.kuali.kfs.core.v5_0.UnifierVendor;
-import org.kuali.kfs.kfs.v5_0.Exception;
-import org.kuali.kfs.kfs.v5_0.FileToByteString;
-import org.kuali.kfs.kfs.v5_0.PurapRequisitionWebService;
-import org.kuali.kfs.kfs.v5_0.RequisitionWebServiceInterface;
 
 
 public class TestClient {
 
+/*
+	
 	public static void main(String[] args) {
 //		String urlstring = "http://localhost:8080/kfs-dev/remoting/purapRequisitionWebService?wsdl";
 		String urlstring = "https://kualinp.uconn.edu/kfs-dev/remoting/purapRequisitionWebService?wsdl";
@@ -161,6 +142,8 @@ public class TestClient {
 
 		return req;
 	}
+	
+	*/
 	
 	/**
 	 * @param urlToCheck String represention of a url
