@@ -19,7 +19,7 @@
 		<mail.version>1.4.4</mail.version>
 		<junit.version>4.12</junit.version>
 		<groovy.version>1.8.5</groovy.version>
-		<jackson.version>1.8.8</jackson.version>
+		<jackson.version>1.9.13</jackson.version>
 		<servlet-api.version>3.1.0</servlet-api.version>
 
 		<spring.version>4.3.25.RELEASE</spring.version>
