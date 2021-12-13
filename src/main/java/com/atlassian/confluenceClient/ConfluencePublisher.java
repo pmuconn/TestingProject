@@ -10,10 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.atlassian.confluence.api.model.content.Content;
 import com.atlassian.confluence.api.model.content.ContentBody;
@@ -31,7 +32,8 @@ import com.atlassian.confluence.api.service.exceptions.ServiceException;
  */
 public class ConfluencePublisher {
 	
-	private static final Logger LOGGER = Logger.getLogger(ConfluencePublisher.class.getName());
+	private final Logger logger = LoggerFactory.getLogger(ConfluencePublisher.class.getName());
+
 	
 	private static final String DEFAULT_CONTENT_TYPE = "application/octet-stream";
 
@@ -376,7 +378,7 @@ public class ConfluencePublisher {
      * @param message
      */
     protected void log(String message) {
-    	LOGGER.info("[confluence] " + message);
+    	logger.info("[confluence] " + message);
     }
     
     /**

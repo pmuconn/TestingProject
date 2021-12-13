@@ -25,6 +25,9 @@ import java.util.regex.Pattern;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * This is a utility tool for common functionality.
@@ -32,6 +35,9 @@ import javax.mail.internet.InternetAddress;
  */
 public final class Util {
 
+	private static final Logger LOG = LoggerFactory.getLogger(Util.class.getName());
+
+	
 	/**
 	 * Determine if all of the Objects are null
 	 * @param Object... - the array of Objects to check
@@ -380,7 +386,7 @@ public final class Util {
 			unchanged = new SimpleDateFormat("yyyy-MM-dd").parse(inDateString);
 			returnValue = new SimpleDateFormat("MM/dd/yyyy").format(unchanged);
 		} catch (ParseException e) {		
-			LoggerUtil.debug("can't parse " + "to yyyy-MM-dd dateobject");
+			LOG.debug("can't parse " + "to yyyy-MM-dd dateobject");
 			//e.printStackTrace();
 		}		
 		return returnValue;
@@ -436,11 +442,11 @@ public final class Util {
 			suffix = sanitizedPhoneNumber.substring(3, 7);
 		} else if (phoneNumberLength > 10) {
 			String message = "Phone number provided will not be formatted, returning [" + inPhoneNumber + "]";
-			LoggerUtil.warn(message);
+			LOG.warn(message);
 			return inPhoneNumber;			
 		} else {			
 			String message = "Phone number provided is an invalid length [" + phoneNumberLength + "]";			
-			LoggerUtil.warn(message);
+			LOG.warn(message);
 			return Constant.EMPTY_STRING;
 		}
 		
@@ -713,9 +719,9 @@ public final class Util {
 							}
 						}
 					} catch (IllegalArgumentException e) {
-						LoggerUtil.error("Illegal argument exception: " + e);
+						LOG.error("Illegal argument exception: " + e);
 					} catch (IllegalAccessException e) {
-						LoggerUtil.error("Illegal access exception: " + e);
+						LOG.error("Illegal access exception: " + e);
 					}			
 					finally {
 						field.setAccessible(false);

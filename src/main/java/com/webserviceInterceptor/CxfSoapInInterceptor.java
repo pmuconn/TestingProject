@@ -19,6 +19,7 @@
 package com.webserviceInterceptor;
 
 import java.io.InputStream;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,7 +32,8 @@ import org.apache.cxf.phase.Phase;
 import org.apache.cxf.transport.http.AbstractHTTPDestination;
 
 public class CxfSoapInInterceptor extends LoggingInInterceptor {
-    private static final org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger.getLogger(CxfSoapInInterceptor.class);
+
+	private static final Logger LOGGER = Logger.getLogger(CxfSoapInInterceptor.class.getName());
 
 
     public CxfSoapInInterceptor() {

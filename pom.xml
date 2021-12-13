@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -6,10 +7,14 @@
 	<artifactId>TestingProject</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<properties>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.6.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
 
-		<org.slf4j-version>1.7.21</org.slf4j-version>
-		<log4j.version>1.2.16</log4j.version>
+	<properties>
 		<commons-io.version>2.1</commons-io.version>
 		<commons-lang.version>3.7</commons-lang.version>
 		<commons-collections.version>3.2.2</commons-collections.version>
@@ -19,7 +24,7 @@
 		<mail.version>1.4.4</mail.version>
 		<junit.version>4.12</junit.version>
 		<groovy.version>1.8.5</groovy.version>
-		<jackson.version>1.9.13</jackson.version>
+		<jackson.version>2.10.3</jackson.version>
 		<servlet-api.version>3.1.0</servlet-api.version>
 
 		<spring.version>4.3.25.RELEASE</spring.version>
@@ -30,21 +35,25 @@
 
 	</properties>
 
+
 	<repositories>
+
 		<repository>
-		      <id>atlassian-public</id>
-		      <url>https://packages.atlassian.com/mvn/maven-external/</url>
-		      <snapshots>
-		        <enabled>true</enabled>
-		        <updatePolicy>never</updatePolicy>
-		        <checksumPolicy>warn</checksumPolicy>
-		      </snapshots>
-		       <releases>
-		         <enabled>true</enabled>
-		         <checksumPolicy>warn</checksumPolicy>
-		      </releases>
-		</repository>		
+			<id>atlassian-public</id>
+			<url>https://packages.atlassian.com/mvn/maven-external/</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+		</repository>
 	</repositories>
+
+
 
 	<build>
 		<finalName>TestingProject</finalName>
@@ -52,7 +61,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
 			</plugin>
 		</plugins>
 	</build>
@@ -60,33 +68,89 @@
 
 	<dependencies>
 
-		<!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-core -->
+<!--  Spring releated dependencies -->
+
 		<dependency>
-		    <groupId>org.apache.cxf</groupId>
-		    <artifactId>cxf-core</artifactId>
-		    <version>3.4.5</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-transports-http -->
 		<dependency>
-		    <groupId>org.apache.cxf</groupId>
-		    <artifactId>cxf-rt-transports-http</artifactId>
-		    <version>3.4.5</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-batch</artifactId>
 		</dependency>
 
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>${servlet-api.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-
-		<!-- Required for spring4 -->
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4j.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-classic</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-ldap</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-actuator</artifactId>
+		</dependency>
+
+<!-- All others -->
+
+
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-core</artifactId>
+			<version>3.4.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>3.4.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet-api.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -151,41 +215,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy-all</artifactId>
-			<version>${groovy.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-			<version>${jackson.version}</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>${jackson.version}</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>org.codehaus.jettison</groupId>
 			<artifactId>jettison</artifactId>
 			<version>1.4.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${org.slf4j-version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>${org.slf4j-version}</version>
 		</dependency>
 
 		<dependency>
@@ -218,78 +250,6 @@
 			</exclusions>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${spring.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>commons-logging</artifactId>
-					<groupId>commons-logging</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
 
 		<dependency>
 			<groupId>au.com.bytecode</groupId>
@@ -309,14 +269,12 @@
 			<version>1.9.4</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.github.albfernandez/juniversalchardet -->
 		<dependency>
 			<groupId>com.github.albfernandez</groupId>
 			<artifactId>juniversalchardet</artifactId>
 			<version>2.4.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.ibm.icu/icu4j -->
 		<dependency>
 			<groupId>com.ibm.icu</groupId>
 			<artifactId>icu4j</artifactId>
@@ -324,7 +282,6 @@
 		</dependency>
 
 
-		<!-- https://mvnrepository.com/artifact/com.jcraft/jsch -->
 		<dependency>
 			<groupId>com.jcraft</groupId>
 			<artifactId>jsch</artifactId>
@@ -332,33 +289,22 @@
 		</dependency>
 
 
-	<dependency>
-	    <groupId>com.atlassian.confluence</groupId>
-	    <artifactId>confluence-rest-client</artifactId>
-	    <version>${confluence.version}</version>
-	</dependency>	
-        
-    <!-- 
-	<dependency>
-	    <groupId>com.atlassian.confluence</groupId>
-	    <artifactId>confluence</artifactId>
-	    <version>${confluence.version}</version>
-	    <scope>provided</scope>
-	</dependency>
-     -->    
+		<dependency>
+			<groupId>com.atlassian.confluence</groupId>
+			<artifactId>confluence-rest-client</artifactId>
+			<version>${confluence.version}</version>
+		</dependency>
 
-	<dependency>
-	    <groupId>com.atlassian.jira</groupId>
-	    <artifactId>jira-rest-java-client-api</artifactId>
-	    <version>5.2.0</version>
-	</dependency>
-	<dependency>
-	    <groupId>com.atlassian.jira</groupId>
-	    <artifactId>jira-rest-java-client-core</artifactId>
-	    <version>5.2.0</version>
-	</dependency>
-	
-
+		<dependency>
+			<groupId>com.atlassian.jira</groupId>
+			<artifactId>jira-rest-java-client-api</artifactId>
+			<version>5.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.atlassian.jira</groupId>
+			<artifactId>jira-rest-java-client-core</artifactId>
+			<version>5.2.0</version>
+		</dependency>
 
 	</dependencies>
 </project>

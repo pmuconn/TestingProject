@@ -17,12 +17,17 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.apache.commons.lang3.time.FastDateFormat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is a date utility tool.
  * @since Q1 2013 - TriCare West
  */
 public final class DateUtil {
+	
+	private static final Logger logger = LoggerFactory.getLogger(DateUtil.class.getName());
+
 	
 	/**
 	 * Adds the supplied "amount" to the supplied Date as indicated by the supplied Date "field". 
@@ -35,7 +40,7 @@ public final class DateUtil {
 		Calendar returnValue = Calendar.getInstance();
 		
 		if (inDate == null) {
-			LoggerUtil.error("Date supplied to the DateUtil 'add' method was null.");
+			logger.error("Date supplied to the DateUtil 'add' method was null.");
 	        throw new IllegalArgumentException("The date must not be null");
 	    }   
 	     
@@ -52,7 +57,7 @@ public final class DateUtil {
 		    	returnValue.add(Calendar.YEAR, inAmount);
 		        break;
 		    default: 
-				LoggerUtil.error("The calendar field " + inField + " supplied to the DateUtil 'add' method is unsupported.");
+		    	logger.error("The calendar field " + inField + " supplied to the DateUtil 'add' method is unsupported.");
 		    	throw new IllegalArgumentException("The calendar field " + inField + " is unsupported");
 	    }                
 	         
@@ -81,10 +86,10 @@ public final class DateUtil {
 					returnValue = true;
 				}
 			} catch (ParseException e) {
-				LoggerUtil.warn("Unable to Compare Dates using FORMAT_EEEE : Error was: "+e.getMessage());
+				logger.warn("Unable to Compare Dates using FORMAT_EEEE : Error was: "+e.getMessage());
 			}
 		} else {
-			LoggerUtil.warn("Unable to Compare Dates using FORMAT_EEEE because a Date argument was null.");
+			logger.warn("Unable to Compare Dates using FORMAT_EEEE because a Date argument was null.");
 		}
 		
 		return returnValue;
@@ -198,7 +203,7 @@ public final class DateUtil {
 	    	 returnValue = df.format(date);
 	    } catch (ParseException e) {
 	    	returnValue = "";
-	    	LoggerUtil.warn("Failed to parse inDate string value to a date: " + e + ":Returning current date instead: " + currentDateZeroTime().toString());
+	    	logger.warn("Failed to parse inDate string value to a date: " + e + ":Returning current date instead: " + currentDateZeroTime().toString());
 	    }
 	    return returnValue;
 	}
@@ -322,7 +327,7 @@ public final class DateUtil {
 		if (century < inCenturyTestAfter) {
     		returnValue = true; 
     	} else {
-    		LoggerUtil.warn("Supplied Date and Century Test did NOT indicate the supplied Date was in the past; Date supplied was ["+
+    		logger.warn("Supplied Date and Century Test did NOT indicate the supplied Date was in the past; Date supplied was ["+
     						inDateToCheck+"] and the Century to Test was ["+inCenturyTestAfter+"].");
     	}
 		
@@ -353,7 +358,7 @@ public final class DateUtil {
 		if (century > inCenturyTestBefore) {
     		returnValue = true; 
     	} else {
-    		LoggerUtil.warn("Supplied Date and Century Test did NOT indicate the supplied Date was in the future; Date supplied was ["+
+    		logger.warn("Supplied Date and Century Test did NOT indicate the supplied Date was in the future; Date supplied was ["+
     						inDateToCheck+"] and the Century to Test was ["+inCenturyTestBefore+"].");
     	}
 		
@@ -439,19 +444,19 @@ public final class DateUtil {
 							}
 						}
 					} catch (ParseException e) {
-						LoggerUtil.warn("Unable to PARSE Date value supplied to Dateutil.isDateFormatted.  Date is: "+convertedDateString + "  Error was: "+e.getMessage());
+						logger.warn("Unable to PARSE Date value supplied to Dateutil.isDateFormatted.  Date is: "+convertedDateString + "  Error was: "+e.getMessage());
 						returnValue = 2;
 					}
 				} else {
-					LoggerUtil.warn("Date value supplied to Dateutil.isDateFormatted FORMATTED to an EMPTY STRING.");
+					logger.warn("Date value supplied to Dateutil.isDateFormatted FORMATTED to an EMPTY STRING.");
 					returnValue = 1;
 				}
 			} catch (ParseException e) {
-				LoggerUtil.warn("Unable to FORMAT Date value supplied to Dateutil.isDateFormatted.  Error was "+e.getMessage());
+				logger.warn("Unable to FORMAT Date value supplied to Dateutil.isDateFormatted.  Error was "+e.getMessage());
 				returnValue = 2;
 			}
 		} else {
-			LoggerUtil.warn("Date value supplied to Dateutil.isDateFormatted was NULL.");			
+			logger.warn("Date value supplied to Dateutil.isDateFormatted was NULL.");			
 			returnValue = 1;
 		}
 		
@@ -492,7 +497,7 @@ public final class DateUtil {
 
 		if (Util.areAnyNull(inStartDate, inEndDate, inDateToCheck)) {
 			returnValue = false;
-			LoggerUtil.warn("Null date argument(s)");
+			logger.warn("Null date argument(s)");
 		} else {
 			resetStartDate = resetTimeToZero(inStartDate);
 			resetEndDate = resetTimeToZero(inEndDate);
@@ -519,7 +524,7 @@ public final class DateUtil {
 		
 		try {
 			parsedDate = stringToDateNoDefault(inDate, InExpectedFormat);
-			LoggerUtil.debug("Supplied String Date does parse tothis Date: "+parsedDate);
+			logger.debug("Supplied String Date does parse tothis Date: "+parsedDate);
 			returnValue = true;
 		} catch (ParseException parseErr) {
 			returnValue = false;
@@ -541,7 +546,7 @@ public final class DateUtil {
 		
 		try {
 			parsedDate = dateFormat.parse(inDate);
-			LoggerUtil.debug("Supplied String Date does parse tothis Date: "+parsedDate);
+			logger.debug("Supplied String Date does parse tothis Date: "+parsedDate);
 			returnValue = true;
 		} catch (ParseException parseErr) {
 			returnValue = false;
@@ -600,7 +605,7 @@ public final class DateUtil {
         	dateFormatter.applyPattern(inDatePattern);
         	returnValue = dateFormatter.format(inDate);
         } else {
-        	LoggerUtil.warn("Failed to parse date to string, date argument is null");
+        	logger.warn("Failed to parse date to string, date argument is null");
         }
         
         return returnValue;
@@ -653,7 +658,7 @@ public final class DateUtil {
 		    	returnValue = dateFormat.parse(inDate);
 		    } catch (ParseException e) {
 		    	returnValue = currentDateZeroTime();
-		    	LoggerUtil.warn("Failed to parse inDate string value to a date: " + e + ":Returning current date instead: " + currentDateZeroTime().toString());
+		    	logger.warn("Failed to parse inDate string value to a date: " + e + ":Returning current date instead: " + currentDateZeroTime().toString());
 		    }
 
 		    return returnValue;	     
@@ -670,7 +675,7 @@ public final class DateUtil {
 	    }
 	    catch (ParseException e)
 	    {
-	        LoggerUtil.error("Failed to parse inDate string value to a date: " + e);
+	        logger.error("Failed to parse inDate string value to a date: " + e);
 	        throw e;
 	    }
 	}
@@ -691,7 +696,7 @@ public final class DateUtil {
 						dt = sdfUTC.parse(dtWithTS);
 						retVal = sdfUTC.format(dt);
 					} catch (ParseException e) {
-						LoggerUtil.error("Failed to parse date in format "+"yyyy-MM-dd");
+						logger.error("Failed to parse date in format "+"yyyy-MM-dd");
 						dt = sdfMMDDYYYY.parse(dtWithTS);
 						retVal = sdfMMDDYYYY.format(dt);
 					}

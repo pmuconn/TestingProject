@@ -27,10 +27,14 @@ import org.apache.cxf.io.CachedOutputStream;
 import org.apache.cxf.io.CachedOutputStreamCallback;
 import org.apache.cxf.message.Message;
 import org.apache.cxf.phase.Phase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CxfSoapOutInterceptor extends LoggingOutInterceptor {
-    private static final org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger.getLogger(CxfSoapOutInterceptor.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(CxfSoapOutInterceptor.class.getName());
 
+    
+    
 
     public CxfSoapOutInterceptor() {
         super(Phase.PRE_STREAM);

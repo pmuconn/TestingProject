@@ -34,8 +34,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import org.apache.log4j.Logger;
-
 public final class AppUtils {
 
 	/* Added for SPRF 11181 END */

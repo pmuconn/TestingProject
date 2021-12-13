@@ -15,8 +15,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
 
-//Log4J imports
-import org.apache.log4j.Logger;
 
 /**
  * UtilTool, Utility class for date convertion

@@ -26,7 +26,8 @@ import java.util.Vector;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
@@ -41,7 +42,9 @@ import com.jcraft.jsch.SftpException;
 public class SFTPServiceImpl implements SFTPService {
 
     private static int PORT = 22;
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SFTPServiceImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SFTPServiceImpl.class.getName());
+
+    
     private Channel channel = null;
     private ChannelSftp c = null;
     private JSch jsch = new JSch();
@@ -62,7 +65,6 @@ public class SFTPServiceImpl implements SFTPService {
         	String filename = args[0];
         	String chmod = args[1];
         	
-        	BasicConfigurator.configure();
         	System.out.println("starting program.");
         	SFTPServiceImpl sftpservice = new SFTPServiceImpl();
         	
@@ -263,7 +265,6 @@ public class SFTPServiceImpl implements SFTPService {
             successful = true;
         } catch (JSchException | SftpException | IOException ex) {
             ex.printStackTrace();
-            LOG.error(ex);
             successful = false;
         } finally {
             if (channel != null) {
@@ -288,7 +289,6 @@ public class SFTPServiceImpl implements SFTPService {
             fileOutputStream = null;
         } catch (JSchException | SftpException | IOException ex) {
             ex.printStackTrace();
-            LOG.error(ex);
             successful = false;
         } finally {
             if (channel != null) {
@@ -328,7 +328,6 @@ public class SFTPServiceImpl implements SFTPService {
 
         } catch (JSchException | SftpException | IOException ex) {
             ex.printStackTrace();
-            LOG.error(ex);
             successful = false;
         } finally {
             if (channel != null) {
@@ -367,7 +366,6 @@ public class SFTPServiceImpl implements SFTPService {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            LOG.error(ex);
             successful = false;
         } finally {
             if (channel != null) {
@@ -396,7 +394,6 @@ public class SFTPServiceImpl implements SFTPService {
         } catch (JSchException ex) {
             LOG.error("setupSession exception, " + ex);
             ex.printStackTrace();
-            LOG.error(ex);
             successful = false;
         }
         return successful;
@@ -441,7 +438,6 @@ public class SFTPServiceImpl implements SFTPService {
             LOG.info("added identities: " + jsch.getIdentityNames());
         } catch (JSchException ex) {
             ex.printStackTrace();
-            LOG.error(ex);
             try {
                 //adds an identity with the private key from the user's home directory
                 LOG.info("adding identity, " + System.getProperty("user.home") + "/.ssh/id_dsa");
@@ -449,7 +445,6 @@ public class SFTPServiceImpl implements SFTPService {
                 LOG.info("added identities: " + jsch.getIdentityNames());
             } catch (JSchException ex2) {
                 ex2.printStackTrace();
-                LOG.error(ex2);
                 result = false;
             }
         }
