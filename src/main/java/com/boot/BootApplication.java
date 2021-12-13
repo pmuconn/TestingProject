@@ -52,6 +52,7 @@ public class BootApplication extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity webSecurity) throws Exception {
 		webSecurity.ignoring() //No Security for these paths
 			.antMatchers("/helloworld/**")
+			.antMatchers("/logview/**")
 			.antMatchers("/pdfreport/**"); 
 		super.configure(webSecurity);
 	}
