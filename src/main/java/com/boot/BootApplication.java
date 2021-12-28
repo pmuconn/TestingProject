@@ -27,20 +27,17 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 })
 @ComponentScan({"com.boot"})
 public class BootApplication extends WebSecurityConfigurerAdapter {
-	@Autowired
-	private AuthenticationEntryPoint authEntryPoint;
-	
-	@Autowired
-	private SecurityProperties securityProperties;
 	
     @Autowired
     private CustomAuthenticationProvider authProvider;	
 
+	@Autowired
+	private SecurityProperties securityProperties;
 	
 	public static void main(String[] args) {
 		
 		SpringApplication app = new SpringApplication(BootApplication.class);
-		app.run(args);		
+		app.run(args);
 	}
 
 	public static Authentication getAuthentication() {
@@ -91,6 +88,20 @@ public class BootApplication extends WebSecurityConfigurerAdapter {
     public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
         return new PropertySourcesPlaceholderConfigurer();
     }
+    
+    //Used to debug all bean names created. Uncomment and beans will display in console.
+//  @Bean
+//  public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+//      return args -> {
+//          System.out.println("Let's inspect the beans provided by Spring Boot:");
+//          String[] beanNames = ctx.getBeanDefinitionNames();
+//          Arrays.sort(beanNames);
+//          for (String beanName : beanNames) {
+//              System.out.println(beanName);
+//          }
+//      };
+//  }
+    
     
 	
 }
