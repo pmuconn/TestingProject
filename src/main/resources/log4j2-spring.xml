@@ -6,7 +6,7 @@
     </Properties>
     <Appenders>
         <RollingFile name="RollingFile-Appender" fileName="${path}/app.log"
-                     filePattern="${path}/travel-%d{yyyy-MM-dd}.log">
+                     filePattern="${path}/app-%d{yyyy-MM-dd}.log">
             <PatternLayout>
                 <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
             </PatternLayout>
@@ -15,6 +15,27 @@
             </Policies>
             <DefaultRolloverStrategy max="20"/>
         </RollingFile>
+
+		<Routing name="RoutingAppender">
+	        <Routes pattern="${ctx:logFileName}">
+	            <Route>
+			        <RollingFile name="Rolling-${ctx:logFileName}" fileName="${path}/${ctx:logFileName}.log"
+			                     filePattern="${path}/${ctx:logFileName}-%d{yyyy-MM-dd}.log">
+			            <PatternLayout>
+			                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+			            </PatternLayout>
+			            <Policies>
+			                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+			            </Policies>
+			            <DefaultRolloverStrategy max="20"/>
+			        </RollingFile>
+	            </Route>
+	            <!-- By having this set to ${ctx:logFileName} it will match when filename
+	                 is not set in the context -->
+	            <Route ref="console" key="${ctx:logFileName}"/>
+	        </Routes>
+	    </Routing>
+
 		<Console name="console" target="SYSTEM_OUT">
 			<PatternLayout
 				pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
@@ -33,6 +54,9 @@
 			<AppenderRef ref="RollingFile-Appender" />
 			<AppenderRef ref="console" />
 		</Logger>
+        <Logger name="com.boot.batch" level="info" additivity="false">
+            <AppenderRef ref="RoutingAppender" />
+        </Logger>
         <Root level="info">
             <AppenderRef ref="RollingFile-Appender" />
 			<AppenderRef ref="console" />
